@@ -29,6 +29,10 @@
                     <!-- Product Info -->
                     <div class="col-md-7">
                         <h3 class="mb-3">{{ $product->title }}</h3>
+                        <p><strong>Category:</strong>
+                            {{ $product->category ? $product->category->name : 'Uncategorized' }}
+                        </p>
+
                         <p><strong>Description:</strong></p>
                         <p>{{ $product->description }}</p>
                         <p><strong>Price:</strong> ${{ number_format($product->price, 2) }}</p>

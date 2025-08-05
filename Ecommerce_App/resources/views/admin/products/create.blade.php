@@ -21,6 +21,19 @@
                     </div>
 
                     <div class="form-group">
+                        <label>Category</label>
+                        <select name="category_id" class="form-control" required>
+                            <option value="">-- Select Category --</option>
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}"
+                                    {{ old('category_id', request('category')) == $category->id ? 'selected' : '' }}>
+                                    {{ $category->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
                         <label>Description</label>
                         <textarea name="description" class="form-control" rows="4" required>{{ old('description') }}</textarea>
                     </div>

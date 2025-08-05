@@ -5,19 +5,23 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Models\Category;
+
 
 class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::latest()->cursorPaginate(5);
+        $products = Product::with('category')->latest()->cursorPaginate(5);
         return view('admin.products.index', compact('products'));
     }
 
 
     public function create()
     {
-        return view('admin.products.create');
+        $categories = Category::all();
+        return view('admin.products.create', compact('categories'));
+
     }
 
     public function store(Request $request)
@@ -26,7 +30,8 @@ class ProductController extends Controller
             'title' => 'required',
             'description' => 'required',
             'price' => 'required|numeric',
-            'image' => 'nullable|image'
+            'image' => 'nullable|image',
+             'category_id' => 'nullable|exists:categories,id', // 👈 must be here
         ]);
 
         if ($request->hasFile('image')) {
@@ -45,8 +50,9 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
-        $products =Product::paginate(10); // Not typical for an edit page
-        return view('admin.products.edit', compact('product', 'products'));
+        $categories = Category::all();
+        return view('admin.products.edit', compact('product', 'categories'));
+
     }
 
     public function update(Request $request, Product $product)
@@ -55,7 +61,9 @@ class ProductController extends Controller
             'title' => 'required',
             'description' => 'required',
             'price' => 'required|numeric',
-            'image' => 'nullable|image'
+            'image' => 'nullable|image',
+             'category_id' => 'nullable|exists:categories,id',
+
         ]);
 
         if ($request->hasFile('image')) {

@@ -25,6 +25,7 @@
                             <th>#</th>
                             <th>Image</th>
                             <th>Title</th>
+                            <th>Category</th>
                             <th>Description</th>
                             <th>Price ($)</th>
                             <th>Actions</th>
@@ -42,6 +43,8 @@
                                     @endif
                                 </td>
                                 <td>{{ $product->title }}</td>
+                                <td>{{ $product->category?->name ??'Uncategorized' }}</td>
+
                                 <td>{{ Str::limit($product->description, 50) }}</td>
                                 <td>{{ $product->price }}</td>
                                 <td>
@@ -62,7 +65,7 @@
                         <div class="p-3 text-center">No products available.</div>
                     @endif
 
-                    <div class="mt-3 ml-3">
+                    <div class="mt-4 mb-4 ml-3">
                         {{ $products->links() }}
                     </div>
                 </div>

@@ -23,11 +23,16 @@
                 </div>
             </div>
         </div>
+        <div class="container-fluid d-flex justify-content-start align-items-center">
+            <a href="{{ route('admin.products.create') }}" class="btn btn-primary ">Add Product</a>
+
+        </div><br>
 
         {{-- Product Table --}}
         <div class="card">
             <div class="card-header bg-secondary text-white">
                 <h3 class="card-title">All Products</h3>
+
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive">
@@ -36,6 +41,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
+                            <th>Category</th>
                             <th>Image</th>
                             <th>Description</th>
                             <th class="d-none d-sm-table-cell">Price</th>
@@ -51,6 +57,9 @@
                                     <a href="{{ route('admin.products.show', $product->id) }}">
                                         {{ $product->title }}
                                     </a>
+                                </td>
+                                <td>
+                                    {{ $product->category ? $product->category->name : 'Uncategorized' }}
                                 </td>
                                 <td>
                                     @if ($product->image)
@@ -75,7 +84,9 @@
                         @endforeach
                         </tbody>
                     </table>
+
                 </div>
+
             </div>
         </div>
     </div>

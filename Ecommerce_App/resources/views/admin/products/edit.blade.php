@@ -20,6 +20,20 @@
                         <label>Title</label>
                         <input type="text" name="title" class="form-control" value="{{ old('title', $product->title) }}" required>
                     </div>
+                    <div class="form-group">
+                        <label for="category_id">Category</label>
+                        <select name="category_id" id="category_id" class="form-control">
+                            <option value="">-- Select Category --</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}"
+                                    {{ (old('category_id', $product->category_id) == $category->id) ? 'selected' : '' }}>
+                                    {{ $category->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+
 
                     <div class="form-group">
                         <label>Description</label>
