@@ -27,8 +27,8 @@ Route::post('/register', [RegisteredUserController::class, 'store']);
 
 // User home route
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/products/{product}', [HomeController::class, 'show'])->name('products.show');
 Route::middleware(['auth'])->group(function () {
+    Route::get('/products/{product}', [HomeController::class, 'show'])->name('products.show');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile/destroy', [ProfileController::class, 'destroy'])->name('profile.destroy');
