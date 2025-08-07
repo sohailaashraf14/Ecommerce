@@ -7,12 +7,14 @@
         <!-- Header -->
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-4 gap-2">
             <h2 class="mb-3 mb-md-0">My Wishlist</h2>
-            <a href="{{ route('home') }}" class="btn btn-primary">← Back to Home</a>
         </div>
 
         <!-- Wishlist Items -->
         <div class="row">
-            @forelse ($items as $item)
+
+
+        @forelse ($items as $item)
+
                 <div class="col-12 col-sm-6 col-lg-4 mb-4 d-flex align-items-stretch">
                     <div class="card w-100 shadow-sm d-flex flex-column">
                         @if ($item->product->image)

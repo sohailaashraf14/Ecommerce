@@ -67,9 +67,22 @@
                         </tr>
                         </tbody>
                     </table>
-                    <div>
-                        <a href="{{ route('home') }}" class="btn btn-primary mr-2">← Back to Home</a>
-                    </div>
+                  <div class="container d-flex justify-content-between">
+                      <div>
+                          <a href="{{ route('home') }}" class="btn btn-primary mr-2">Back to Home</a>
+                      </div>
+                      @if($cartItems->count() > 0)
+                          <form method="POST" action="{{ route('payment.test') }}">
+                              @csrf
+                              <input type="hidden" name="total" value="{{ $cartItems->sum(fn($item) => $item->product->price * $item->quantity) }}">
+                              <button type="submit" class="btn btn-primary">Proceed to Checkout</button>
+                          </form>
+                  </div>
+                @endif
+
+                  </div>
+
+
                 @endif
             </div>
         </div>

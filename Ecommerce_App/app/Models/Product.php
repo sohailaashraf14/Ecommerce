@@ -30,6 +30,9 @@ class Product extends Model
     {
         return $this->hasMany(\App\Models\Wishlist::class);
     }
-
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class)->withPivot('quantity', 'price');
+    }
 
 }

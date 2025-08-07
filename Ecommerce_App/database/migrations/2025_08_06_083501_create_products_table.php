@@ -10,7 +10,8 @@ return new class extends Migration {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->foreign('category_id')->references('id')->on('categories')->cascadeOnDelete();
+            // ✅ First define the column
+            $table->foreignId('category_id')->constrained()->cascadeOnDelete();
             $table->text('description');
             $table->string('image')->nullable();
             $table->decimal('price', 8, 2);
@@ -23,3 +24,4 @@ return new class extends Migration {
         Schema::dropIfExists('products');
     }
 };
+
